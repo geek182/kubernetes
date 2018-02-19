@@ -1,0 +1,18 @@
+##FROM https://kubernetes.io/docs/concepts/services-networking/service/#defining-a-service
+```
+kind: Service
+apiVersion: v1
+metadata:
+  name: my-service
+spec:
+  selector:
+    app: MyApp
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 9376
+```
+    
+    
+ This specification will create a new Service object named “my-service” which targets TCP port 9376 on any Pod with
+ the "app=MyApp" label
