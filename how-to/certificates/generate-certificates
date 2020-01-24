@@ -1,0 +1,8 @@
+#CA
+
+#Server Certificates
+
+#Client Certificates
+
+#TLS bootstrapping
+https://kubernetes.io/docs/reference/command-line-tools-reference/kubelet-tls-bootstrapping/
