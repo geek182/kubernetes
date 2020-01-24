@@ -1,0 +1,24 @@
+kubectl drain nodename
+- drain and make unschedulable 
+
+#possible errors:
+#when the node has a pod not managed by RC, RS, Job, DS and StatefulSet
+
+master $ kubectl drain node02 --ignore-daemonsets
+node/node02 cordoned
+error: unable to drain node "node02", aborting command...
+
+There are pending nodes to be drained:
+ node02
+error: cannot delete Pods not managed by ReplicationController, ReplicaSet, Job, DaemonSet or StatefulSet (use --force to overr
+ide): default/hr-app
+
+#when the node has daemonsets running on it ( and probably it has )
+kubectl drain node01
+node/node01 cordoned
+error: unable to drain node "node01", aborting command...
+
+There are pending nodes to be drained:
+ node01
+error: cannot delete DaemonSet-managed Pods (use --ignore-daemonsets to ignore): kube-system/kube-proxy-x25df, kube-system/weav
+e-net-8ljx5
