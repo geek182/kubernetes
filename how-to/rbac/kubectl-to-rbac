@@ -1,2 +1,3 @@
-  kubectl create role pod-reader --verb=get --verb=list --verb=watch --resource=pods
+kubectl create role pod-reader --verb=get --verb=list --verb=watch --resource=pods
  
+kubectl create role developer --verb=list --verb=create --dry-run --resource=pods -o yaml
