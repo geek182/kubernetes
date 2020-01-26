@@ -1,0 +1,11 @@
+#link: https://kubernetes.io/docs/tasks/debug-application-cluster/debug-service/
+
+kubectl logs pod-name -n namespace
+
+#run the container
+kubectl run -it --rm --restart=Never alpine --image=alpine sh
+kubectl run busybox --image=busybox --rm -it --restart=Never -- sh
+
+
+#connect to an existent container 
+kubectl exec <POD-NAME> -c <CONTAINER-NAME> -- <COMMAND>
