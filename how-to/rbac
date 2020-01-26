@@ -1,0 +1,3 @@
+kubectl auth can-i create pod 
+
+kubectl auth can-i create pod --as dev-user
