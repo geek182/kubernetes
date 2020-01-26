@@ -12,4 +12,13 @@ ResourceNames can be pointing out to a specific resource like a pod/config-map
   resourceNames:
   - dark-blue-app
   
-  
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  namespace: default
+  name: configmap-updater
+rules:
+- apiGroups: [""]
+  resources: ["configmaps"]
+  resourceNames: ["my-configmap"]
+  verbs: ["update", "get"]
