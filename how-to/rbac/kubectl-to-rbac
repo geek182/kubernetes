@@ -1,3 +1,8 @@
 kubectl create role pod-reader --verb=get --verb=list --verb=watch --resource=pods
  
-kubectl create role developer --verb=list --verb=create --dry-run --resource=pods -o yaml
+#Create a role name developer for list and create pods and export to a file yaml
+kubectl create role developer --verb=list --verb=create --dry-run --resource=pods -o yaml > role-dev-user.yml
+
+#Create a rolebinding to connect the role developer to a user/sa/group
+kubectl create rolebinding dev-user-binding --role=developer --user=dev-user --dry-run -o yaml > role-binding-dev-user
+.yml
