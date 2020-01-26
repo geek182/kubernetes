@@ -1,0 +1,2 @@
+  kubectl create role pod-reader --verb=get --verb=list --verb=watch --resource=pods
+ 
