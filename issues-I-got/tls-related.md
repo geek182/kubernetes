@@ -20,7 +20,7 @@ So manually I tried connected to the master:
 #### above the command is showing no node because I delete the node previously register.
 So using the same certificates I'm able to communicate to the API so kubelet is okay.
 
-I stopped the kubelet on this worker just to make sure it wasn't the responsible for the messages and start to rule out few options:
+I stopped the kubelet on this worker just to make sure it wasn't the responsible for the messages and for starting to rule out few options:
 ```
 systemctl stop kubelet
 ```
@@ -53,6 +53,6 @@ Looking into the kube-apiserver configuration I can see the CIDR is set to 10.96
 /usr/local/bin/kube-apiserver \
   --service-cluster-ip-range=10.96.0.0/24 
 ```
-###Problem and Solution:
+### Problem and Solution:
 
 the main issue here is the server certificate issue is not complete, the solution is re-issue the certificate with the complete list of known ips for kube-api.
