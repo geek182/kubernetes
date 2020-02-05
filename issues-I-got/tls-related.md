@@ -48,5 +48,10 @@ the container is trying to communicate to the master using the IP "Get https://1
  ``` x509: certificate is valid for 172.20.82.219, 192.168.5.10, 127.0.0.1, not 10.96.0.1 ```
 
 Looking into the kube-apiserver configuration I can see the CIDR is set to 10.96.0.10.
+```
+/usr/local/bin/kube-apiserver \
+  --service-cluster-ip-range=10.96.0.0/24 
+```
+###Problem and Solution:
 
-the main issue here is the certificate issue to the apiserver is not complete, the solution is re-issue the certificate with the complete list of known ips for kube-api.
+the main issue here is the server certificate issue is not complete, the solution is re-issue the certificate with the complete list of known ips for kube-api.
