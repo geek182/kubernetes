@@ -1,4 +1,5 @@
 On the master node I get this message:  
+
 ``` Feb 02 17:24:41 k8s-master-01 kube-apiserver[24745]: I0202 17:24:41.729232   24745 log.go:172] http: TLS handshake error from 192.168.5.15:49448: remote error: tls: bad certificate ```
 
 Ok, TLS handshake error plus the source, good to start but which components is behind this message ? first guess KUBELET
