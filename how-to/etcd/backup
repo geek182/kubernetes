@@ -1,0 +1,4 @@
+##to collect information from the etcd configuration look on the etcd-master pod or service.
+
+ETCDCTL_API=3 etcdctl --endpoints 127.0.0.1:2379 --cacert=/etc/kubernetes/pki/etcd/ca.crt --cert=/etc/kubernetes/pki/etcd/server.crt --key=/etc/kubernetes/pki/e
+tcd/server.key  snapshot save /tmp/snapshot-pre-boot.db
