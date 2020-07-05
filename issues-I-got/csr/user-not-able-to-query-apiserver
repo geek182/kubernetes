@@ -1,0 +1,48 @@
+##user
+kubectl get pod
+
+error: You must be logged in to the server (Unauthorized)
+
+##kube-apiserver
+Jul  5 15:04:56 k8s-master-01 kube-apiserver[888]: E0705 15:04:56.672354     888 authentication.go:89] Unable to authenticate the request due to an error: x509: certificate specifies an incompatible key usage
+
+error:
+when I was creating the CertificateSigningRequest for this user I put the incorrect "key usage" and other configuration on my request:
+
+apiVersion: certificates.k8s.io/v1beta1
+kind: CertificateSigningRequest
+metadata:
+  name: k8s-user
+spec:
+  request: $(cat k8s-user.csr | base64 | tr -d '\n')
+  usages:
+  - digital signature
+  - key encipherment
+  - server auth
+
+the msg is showing "certificate specifies an incompatible key usage", looking on the documentation:
+https://kubernetes.io/docs/reference/access-authn-authz/certificate-signing-requests/#create-certificate-request-kubernetes-object
+    usage has to be 'client auth'
+
+##Fixing
+Create a new CSR request with the correct option:
+
+apiVersion: certificates.k8s.io/v1beta1
+kind: CertificateSigningRequest
+metadata:
+  name: k8s-user-new 
+spec:
+  request: $(cat k8s-user.csr | base64 | tr -d '\n')
+  usages:
+  - client auth
+  
+  
+- Aprove CSR - kubectl certificate k8s-user-new
+- Download CRT - kubectl get csr k8s-user-new -o jsonpath='{.status.certificate}'     | base64 --decode > k8s-user.crt
+- replace old certificate with the new one on kubeconfig
+
+# after that, the user is able to query the API.
+kubectl get pod
+NAME    READY   STATUS    RESTARTS   AGE
+nginx   1/1     Running   1          14d
+
