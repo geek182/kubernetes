@@ -1,0 +1,31 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ingress-demo
+spec:
+  ingressClassName: nginx #expected to be created before
+  defaultBackend:
+    service:
+        name: ingress-demo-default
+        port:
+           number: 8080
+  rules:
+    - host: k8s.demo.com
+      http:
+        paths:
+          - path: /appa
+            pathType: Prefix
+            backend:
+              service:
+                name: service-appA
+                port:
+                  number: 8081
+          - path: /appb
+            pathType: Prefix
+            backend:
+              service:
+                name: service-appB
+                port:
+                  number: 8082
+
+
